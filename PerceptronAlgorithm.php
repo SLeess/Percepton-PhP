@@ -71,3 +71,21 @@ $PesosIniciais = array(0, 0);
 $testes = array(array(0, 0, 0), array(0, 1, 1), array(1, 0, 1), array(1, 1, 1));
 
 treinarPerceptro($testes, $PesosIniciais, taxaDeAprendizagem);
+
+
+/*
+Considerando que:
+        { 1 net ≥ 0
+    y = |
+        } 0 net < 0
+
+    Equação para encontrar novos pesos
+    Wᵢⱼ₍ₙ ₊ ₁₎ = Wᵢⱼ₍ₙ₎ + nxᵢ(ydⱼ - yⱼ)
+
+    Média ponderada de entradas para obter net
+        ₙ
+        Σ = x₁ × w₁
+    i=0
+
+    Sendo x0 = 1 e w0 = -limia
+*/
