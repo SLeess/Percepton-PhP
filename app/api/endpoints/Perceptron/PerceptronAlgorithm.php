@@ -156,6 +156,27 @@ class Perceptro{
 	    array_unshift($this->Pesos, $this->limiar);
     }
 
+    public function pesosAleatorios(
+        int $taman = 0
+    ): void
+    {
+        if(!$taman){
+            $tamanPadroes = sizeof($this->padroes[0]);
+            if($tamanPadroes === 0){
+                print "Impossível delimitar a quantidade de pesos para serem setados.";
+                return;
+            } 
+
+            $taman = $tamanPadroes;
+        }
+
+        for($x = 0; $x < $taman; $x++){
+            $randomFloat = rand(0, 10) / 10;
+            $this->Pesos[] = $randomFloat;
+        }
+        return;
+    }
+
     public function setPesos(array $Pesos):void
     {
         $this->Pesos = $Pesos;
