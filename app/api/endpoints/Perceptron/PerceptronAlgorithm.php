@@ -6,14 +6,21 @@ class Perceptro{
     public function __construct(
       private array $padroes = [],
       private array $Pesos = [],
-      private int $taxaDeAprendizagem = 1,
+      private float $taxaDeAprendizagem = 1,
       private int $limiar = 0,
-    ){}
+    ){
+        if($Pesos)
+           $this->setW0();
+
+        if($padroes)
+           $this->setX0();
+    }
     
     public function treinarPerceptro(
         array $padroes = [], 
-        int $taxaDeAprendizagem = 0,
+        float $taxaDeAprendizagem = 0,
         array $Pesos = [],
+        int $maxCiclos = 1000
     ): void {
         if ($padroes) {
             $this->setPadroes($padroes);
@@ -33,6 +40,10 @@ class Perceptro{
         $posDeNovosPesos = -1;
 
         while (1) {
+            if ($contCiclos >= $maxCiclos) {
+                print("\n           Limite de ciclos atingido. O treinamento foi interrompido.\n");
+                break;
+            }
             $verificado = true;
             $padrao = 1;
             print("\n                   	Ciclo: " . ++$contCiclos . "\n");
@@ -64,7 +75,7 @@ class Perceptro{
                     for ($i = 0; $i < sizeof($this->Pesos); $i++) {
                         print("   	W$i = ");
                         print(($this->Pesos[$i] >= 0) ? " " : "");
-                        print(number_format($this->Pesos[$i], 1, '.', '') . " + $taxaDeAprendizagem x " . $teste[$i] . " x (" . $yd . ' - ' . $somatorio . ") = ");
+                        print(number_format($this->Pesos[$i], 1, '.', '') . " + ". $this->taxaDeAprendizagem . " x " . $teste[$i] . " x (" . $yd . ' - ' . $somatorio . ") = ");
                         $this->Pesos[$i] += $this->taxaDeAprendizagem * $teste[$i] * ($yd - $somatorio);
                         print(($this->Pesos[$i] >= 0) ? " " : "");
                         print(number_format($this->Pesos[$i], 1, '.', '') . "\n");
@@ -153,7 +164,7 @@ class Perceptro{
     private function setW0():void
     {
         //w0
-	    array_unshift($this->Pesos, $this->limiar);
+	    array_unshift($this->Pesos, - $this->limiar);
     }
 
     public function pesosAleatorios(
@@ -170,7 +181,8 @@ class Perceptro{
             $taman = $tamanPadroes;
         }
 
-        for($x = 0; $x < $taman; $x++){
+        $this->Pesos = [];
+        for($x = 0; $x < $taman-1; $x++){
             $randomFloat = rand(0, 10) / 10;
             $this->Pesos[] = $randomFloat;
         }

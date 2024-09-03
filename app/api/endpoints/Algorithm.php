@@ -1,12 +1,12 @@
 <?php
 require_once("../endpoints/Perceptron/PerceptronAlgorithm.php");
 // except for the w0
-$PesosIniciais = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+$PesosIniciais = [0,0,0, 0,0,0, 0,0,0];
 
 $padroesDeTreinamento = [
                        //yd
-    [1,1,1,0,1,0,0,1,0,  1], 
-    [1,0,1,1,1,1,1,0,1,  0]
+    [1,1,1, 0,1,0, 0,1,0,  1], 
+    [1,0,1, 1,1,1, 1,0,1,  0]
 ];
 
 //$pesos = treinarPerceptro($testes, $PesosIniciais, taxaDeAprendizagem);
