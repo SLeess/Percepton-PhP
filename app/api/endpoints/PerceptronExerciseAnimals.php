@@ -1,7 +1,7 @@
 <?php
 require_once("../endpoints/Perceptron/PerceptronAlgorithm.php");
 // except for the w0
-$PesosIniciais = [0, 0, 0];
+$Pesos = [0, 0, 0];
 
 $padroesDeTreinamento = [
 // except for the x0                                          //yd
