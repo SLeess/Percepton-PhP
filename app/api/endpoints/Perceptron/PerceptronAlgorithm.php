@@ -13,7 +13,7 @@ class Perceptro{
            $this->setW0();
 
         if($padroes)
-           $this->setX0();
+           $this->padroes = $this->setX0($padroes);
     }
     
     public function treinarPerceptro(
@@ -101,15 +101,16 @@ class Perceptro{
     public function testarPerceptro(
         array $casosDeTeste,
     ){
+        $casosDeTeste = $this->setX0($casosDeTeste);
         
         print"\n\n\n                     TESTANDO O PERCEPTRO TREINADO                      \n";
         foreach($casosDeTeste as $index => &$teste){
             $somatorio = 0;
             print("Teste ".$index+ 1 . ": \n    ");
-            for ($i = 0; $i < sizeof($teste) - 1; $i++) {
+            for ($i = 0; $i < sizeof($teste); $i++) {
                 $somatorio += $teste[$i] * $this->Pesos[$i];
                 print($teste[$i] . ' x (' . $this->Pesos[$i] . ')');
-                if ($i != sizeof($teste) - 2) {
+                if ($i != sizeof($teste) - 1) {
                     print(" + ");
                 }
             }
@@ -141,12 +142,13 @@ class Perceptro{
 
     // Para Padrões de Treinamento
 
-    private function setX0(): void
+    private static function setX0(array $data): array
     {
-        foreach ($this->padroes as &$padrao) {
+        foreach ($data as &$padrao) {
             //x0
             array_unshift($padrao, self::x0);
         }
+        return $data;
     }
 
     public function getPadroes(): array
@@ -156,8 +158,7 @@ class Perceptro{
 
     public function setPadroes(array $padroes):void
     {
-        $this->padroes = $padroes;
-        $this->setX0();
+        $this->padroes = $this->setX0($padroes);
     }
 
     // Para Pesos

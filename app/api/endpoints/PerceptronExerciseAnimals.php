@@ -22,9 +22,9 @@ $casosDeTeste = [
 
 //$pesos = treinarPerceptro($testes, $PesosIniciais, taxaDeAprendizagem);
 $neuronio = new Perceptro(padroes: $padroesDeTreinamento, Pesos: $PesosIniciais, limiar: 1, taxaDeAprendizagem: 0.6);
-//$neuronio->pesosAleatorios();
+$neuronio->pesosAleatorios();
 $neuronio->treinarPerceptro();
 $neuronio->exibirPesos();
 
 //Casos de teste
-# $neuronio->testarPerceptro($casosDeTeste);
+$neuronio->testarPerceptro($casosDeTeste);
